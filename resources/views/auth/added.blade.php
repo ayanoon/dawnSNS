@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="clear">
-<p><?php $username_data?>さん、</p>
+<p>{{ $data->username }}さん、</p>
 <p>ようこそ！DAWNSNSへ！</p>
 <p>ユーザー登録が完了しました。</p>
 <p>さっそく、ログインをしてみましょう。</p>

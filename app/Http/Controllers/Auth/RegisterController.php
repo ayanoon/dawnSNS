@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-
+    // bcrypt:パスワードをセキュアに保存するのを支援する
 
     // public function registerForm(){
     //     return view("auth.register");
@@ -85,7 +85,6 @@ class RegisterController extends Controller
     }
 
     public function added(){
-        $username_data = $data['username'];
-        return view('auth.added',$username_data);
+        return view('auth.added');
     }
 }

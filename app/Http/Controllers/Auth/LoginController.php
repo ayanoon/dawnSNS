@@ -44,6 +44,8 @@ class LoginController extends Controller
         if($request->isMethod('post')){
             //もしリクエストが「post」だったら
             $data=$request->only('mail','password');
+            // $dataは送信したデータのうち、mailとpwのみを取得
+
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
