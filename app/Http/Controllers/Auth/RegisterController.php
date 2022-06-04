@@ -49,10 +49,24 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+            'username' => 'required|string|min:4|max:12',
+            'mail' => 'required|string|email|min:4|max:30|unique:users',
+            'password' => 'required|string|alpha_num|min:4|max:12|confirmed',
+        ],[
+            'username.required' => '名前を入力してくださいな',
+            'username.min' => '名前は4文字以上で入力してください。',
+            'username.max' => '名前は12文字以下で入力してください。',
+            'mail.required' => 'メールアドレスを入力してください。',
+            'mail.min' => 'メールアドレスは4文字以上で入力してください。',
+            'mail.max' => 'メールアドレスは30文字以下で入力してください。',
+            'mail.email' => 'メールアドレスを入力してください。',
+            'mail.required' => 'このメールアドレスは既に登録されています。',
+            'password.required' => 'パスワードを入力してください。',
+            'password.alpha_num' => 'アルファベットまたは数字で入力してください。',
+            'password.min' => 'パスワードは4文字以上で入力してください。',
+            'password.max' => 'パスワードは12文字以上で入力してください。',
+            'password.confirmed' => '同じパスワードを2回入力してください。',
+        ])->validate();
     }
 
     /**
@@ -78,8 +92,13 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
+            // リクエスト(フォームで送られてきた入力値)のうち、入力値を$requestへ
+            $this->validator($data);
             $this->create($data);
-            return redirect('added');
+            return redirect('added')->with('name', $data['username']);
+            // URLを移りたいので、redirectを使う。redirectで変数を渡したいときにはwithを使う。
+            // redirectの時は、sessionで受け取る。変数：name
+            // viewで渡すときには、{{$data=>username}}で受け取ればよい。
         }
         return view('auth.register');
     }
