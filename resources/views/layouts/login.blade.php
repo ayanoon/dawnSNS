@@ -11,7 +11,7 @@
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
-    <link rel="icon" href="画像URL" sizes="16x16" type="image/png" />
+    <link rel="icon" href="images/arrow.png" sizes="16x16" type="image/png" />
     <link rel="icon" href="画像URL" sizes="32x32" type="image/png" />
     <link rel="icon" href="画像URL" sizes="48x48" type="image/png" />
     <link rel="icon" href="画像URL" sizes="62x62" type="image/png" />
@@ -22,7 +22,9 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/logo.png"></a></h1>
+            <h1><a href="/top"><img src="../../../public/images/main_logo.png" alt="DAWNロゴ"></a></h1>
+            <!-- ↑画像を入れられないのなんで・・・？ -->
+
             <div id="">
                 <div id="">
                     <p>{{ $user = Auth::user()->username }}さん<img src="images/arrow.png"></p>
@@ -33,8 +35,10 @@
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
             </div>
+
         </div>
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')

@@ -1,9 +1,45 @@
 @chasert "utf-8";
 
-html{
+html {
     height: 100%;
 }
-body{
+
+body {
     height: 100%;
-    background: #3C4767;
+    background: linear-gradient(to bottom, #3C4767, #ed514e);
+}
+
+.top-title {
+    text-align: center;
+}
+
+label,
+.sub-title,
+.welcome {
+    text-align: center;
+    color: white;
+}
+
+label {
+    margin-top: 20px;
+}
+
+.logout-wrapper {
+    margin-top: 50px;
+    text-align: center;
+    /* background-color: #3C4767;
+    opacity: 0.5; 今度やる。 */
+}
+
+.submit-button {
+    background-color: navy;
+    color: white;
+    padding: 2px 20px;
+    margin-top: 10px;
+}
+
+.register-button {
+    color: white;
+    display: inline-block;
+    margin-top: 30px;
 }
