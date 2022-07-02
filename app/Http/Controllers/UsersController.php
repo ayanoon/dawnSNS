@@ -37,15 +37,12 @@ class UsersController extends Controller
 
         ]);
 
-        $data = $request->input();       //フォームの内容を取り出す
+        $data = $request->input();       //フォームの内容を文字だけ取り出す
 
-        // return Validator::make($data, [
-        //     'userName' => 'required|string|min:4|max:12',
-        //     'mail' => 'required|string|email|min:4|max:30|Rule::unique(users)->ignore($user_mail),',
-        //     'newPassword' => 'string|alpha_num|min:4|max:12',
-        //     'bio' => 'nullable|string|max:200',
-        //     'icon' => 'nullable|alpha_num|mimes:jpeg,bmp,png,gif,svg',
-        // ], [
+        // ddd($request->all());undifiedとか、項目渡せていなそうなエラーだったら、これ使うとよい。
+
+
+        //  [
         //     'username.required' => '名前を入力してください.',
         //     'username.min' => '名前は4文字以上で入力してください。',
         //     'username.max' => '名前は12文字以下で入力してください。',
@@ -65,7 +62,7 @@ class UsersController extends Controller
             if (request('icon')) { //アイコンに画像がある場合の処理
                 $images = $request->file('icon')
                     ->getClientOriginalName(); //アップロードされたファイルの名前を取得する。getとかfirstとかじゃ取得できないのでこれを使う。
-                $request->file('icon')->storeAs('public/images/', $images);
+                $request->file('icon')->storeAs('images/', $images, 'icon_up');
             } else { //画像にアイコンがない場合の処理
                 $images = DB::table('users')
                     ->where('id', Auth::id())
@@ -79,7 +76,7 @@ class UsersController extends Controller
                     'mail' =>  $data['mail'],
                     'password' => bcrypt($data['newPassword']),
                     'bio' => $data['bio'],
-                    'images' => $data['icon'],
+                    'images' => $images,
                     'updated_at' => now(),
                 ]);
 
@@ -89,7 +86,7 @@ class UsersController extends Controller
             if (request('icon')) { //アイコンに画像がある場合の処理
                 $images = $request->file('icon')
                     ->getClientOriginalName();
-                $request->file('icon')->storeAs('public/images/', $images);
+                $request->file('icon')->storeAs('images/', $images, 'icon_up');
             } else { //画像にアイコンがない場合の処理
                 $images = DB::table('users')
                     ->where('id', Auth::id())
@@ -103,54 +100,7 @@ class UsersController extends Controller
                     'mail' =>  $data['mail'],
                     'password' => $auth->password,
                     'bio' => $data['bio'],
-                    'images' => $data['icon'],
-                    'updated_at' => now(),
-                ]);
-            return redirect('/top');
-        }
-
-
-
-
-        if ($data['icon']) { //アイコンに画像がある場合に
-
-            if (request('newPassword')) { //パスワードに記載がある場合の処理
-
-            } else { //パスワードに記載がない場合の処理
-                $password = DB::table('users')
-                    ->where('id', Auth::id())
-                    ->value('password');
-            }
-
-            \DB::table('users')
-                ->where('id', Auth::id())
-                ->update([
-                    'username' => $data['userName'],
-                    'mail' =>  $data['mail'],
-                    'password' => bcrypt($password),
-                    'bio' => $data['bio'],
-                    'images' => $data['icon'],
-                    'updated_at' => now(),
-                ]);
-
-            return redirect('/top');
-        } else { //アイコンに画像がない場合の処理
-            if (request('newPassword')) { //パスワードに記載がある場合の処理
-
-            } else { //パスワードに記載がない場合の処理
-                $password = DB::table('users')
-                    ->where('id', Auth::id())
-                    ->value('password');
-            }
-
-            \DB::table('users') //アイコンに画像がある場合の処理
-                ->where('id', Auth::id())
-                ->update([
-                    'username' => $data['userName'],
-                    'mail' =>  $data['mail'],
-                    'password' => bcrypt($data['newPassword']),
-                    'bio' => $data['bio'],
-                    'images' => $auth->images,
+                    'images' => $images,
                     'updated_at' => now(),
                 ]);
             return redirect('/top');

@@ -34,6 +34,13 @@
                     <span></span>
                     <span></span>
                 </div>
+                <div>
+                    <ul>
+                        <li><a href="/top">ホーム</a></li>
+                        <li><a href="/profile">プロフィール</a></li>
+                        <li><a href="/logout">ログアウト</a></li>
+                    </ul>
+                </div>
             </nav>
     </header>
 
