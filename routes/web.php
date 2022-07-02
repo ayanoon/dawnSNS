@@ -23,6 +23,7 @@
 Route::get('/login', 'Auth\LoginController@login');
 Route::get('/', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
+Route::post('/', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
@@ -31,13 +32,21 @@ Route::get('/added', 'Auth\RegisterController@added');
 
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
-Route::post('/top','PostsController@index');
-Route::post('/top','PostsController@post');
+Route::get('/top', 'PostsController@index');
+Route::post('/top', 'PostsController@index');
+Route::post('/top', 'PostsController@post');
 
-Route::get('/profile','UsersController@profile');
+Route::get('/top/{id}/update-form', 'PostsController@updateForm');
+Route::post('/top/update', 'PostsController@update');
 
-Route::get('/search','UsersController@index');
+Route::get('/top/{id}/delete', 'PostsController@delete');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+Route::post('/top/create', 'PostsController@create');
+
+Route::get('/profile', 'UsersController@profile');
+Route::post('/profile', 'UsersController@update');
+
+Route::get('/search', 'UsersController@index');
+
+Route::get('/follow-list', 'PostsController@index');
+Route::get('/follower-list', 'PostsController@index');

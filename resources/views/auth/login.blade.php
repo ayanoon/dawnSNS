@@ -4,8 +4,9 @@
 
 {!! Form::open() !!}
 <div class="logout-wrapper">
-<p class="welcome">DAWNSNSへようこそ</p>
-
+   <div class="title-wrapper">
+    <p class="title">DAWNSNSへようこそ</p>
+   </div>
 <div class="form-wrapper">
 {{ Form::label('MailAdress')}}<br>
 {{ Form::text('mail',null,['class' => 'input']) }}<br>

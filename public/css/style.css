@@ -1,22 +1,66 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#3C4767;
+header {
+    background: #3C4767;
 }
 
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #6C6C6C;
+}
+
+.menu-trigger {
+    position: relative;
+    width: 20px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+.menu-trigger span {
+    display: block;
+    position: absolute;
+    width: 20px;
+    border-bottom: solid 1px #fff;
+    border-radius: 3px;
+    transition: .35s ease-in-out;
+}
+
+.menu-trigger span:nth-child(1) {
+    top: 10px;
+    transform: rotate(60deg);
+}
+
+.menu-trigger span:nth-child(2) {
+    top: 10px;
+    left: 9px;
+    transform: rotate(-60deg);
+}
+
+
+/* ここからはメニュー開いているとき */
+.menu-trigger.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(-60deg);
+}
+
+/* 2番目と3番目のspan要素を45度方向に回す */
+.menu-trigger.active span:nth-child(2) {
+    top: 10px;
+    transform: rotate(60deg);
 }
