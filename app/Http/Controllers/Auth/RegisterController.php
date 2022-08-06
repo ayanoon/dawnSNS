@@ -52,8 +52,8 @@ class RegisterController extends Controller
             'username' => 'required|string|min:4|max:12',
             'mail' => 'required|string|email|min:4|max:30|unique:users',
             'password' => 'required|string|alpha_num|min:4|max:12|confirmed',
-        ],[
-            'username.required' => '名前を入力してくださいな',
+        ], [
+            'username.required' => '名前を入力してください。',
             'username.min' => '名前は4文字以上で入力してください。',
             'username.max' => '名前は12文字以下で入力してください。',
             'mail.required' => 'メールアドレスを入力してください。',
@@ -89,8 +89,9 @@ class RegisterController extends Controller
     //     return view("auth.register");
     // }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
+    public function register(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $data = $request->input();
             // リクエスト(フォームで送られてきた入力値)のうち、入力値を$requestへ
             $this->validator($data);
@@ -103,7 +104,8 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    public function added(){
+    public function added()
+    {
         return view('auth.added');
     }
 }

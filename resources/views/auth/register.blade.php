@@ -8,33 +8,33 @@
     <h2 class="title">新規ユーザー登録</h2>
   </div>
 
-{{ Form::label('UserName') }}<br>
-{{ Form::text('username',null,['class' => 'input']) }}<br>
-@if($errors->has('username'))
-{{$errors->first('username')}}
-@endif
+  {{ Form::label('UserName') }}<br>
+  {{ Form::text('username',null,['class' => 'input']) }}<br>
+  @if($errors->has('username'))
+  {{$errors->first('username')}}
+  @endif
 
-{{ Form::label('MailAdress') }}<br>
-{{ Form::text('mail',null,['class' => 'input']) }}<br>
-@if($errors->has('mail'))
-{{$errors->first('mail')}}
-@endif
+  {{ Form::label('MailAdress') }}<br>
+  {{ Form::text('mail',null,['class' => 'input']) }}<br>
+  @if($errors->has('mail'))
+  {{$errors->first('mail')}}
+  @endif
 
-{{ Form::label('Password') }}<br>
-{{ Form::text('password',null,['class' => 'input']) }}<br>
-@if($errors->has('password'))
-{{$errors->first('password')}}
-@endif
+  {{ Form::label('Password') }}<br>
+  {{ Form::text('password',null,['class' => 'input']) }}<br>
+  @if($errors->has('password'))
+  {{$errors->first('password')}}
+  @endif
 
-{{ Form::label('Password Confirm') }}<br>
-{{ Form::text('password_confirmation',null,['class' => 'input']) }}<br>
+  {{ Form::label('Password Confirm') }}<br>
+  {{ Form::text('password_confirmation',null,['class' => 'input']) }}<br>
 
 
-{{ Form::submit('REGISTER', ['class' => 'submit-button'])}}
+  {{ Form::submit('REGISTER', ['class' => 'submit-button'])}}
 
-<p><a class="register-button" href="/login">ログイン画面へ戻る</a></p>
+  <p><a class="register-button" href="/login">ログイン画面へ戻る</a></p>
 
-{!! Form::close() !!}
+  {!! Form::close() !!}
 </div>
 
 @endsection

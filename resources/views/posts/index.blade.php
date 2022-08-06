@@ -6,15 +6,18 @@
 
     {!! Form::open(['url' => 'top/create']) !!}
     <div class="form-group">
-        {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容']) !!}
+        {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '何をつぶやこうか…?']) !!}
     </div>
 
-    <button type="submit" class="btn btn-success pull-right">追加</button>
+    <input type="image" class="button" src="images/post.png" alt="送信">
+
     {!! Form::close() !!}
 
     <div class="post-wrapper">
         @foreach($posts_list as $list)
         <div style="padding:2rem; border-top: solid 1px #E6ECF0; border-bottom: solid 1px #E6ECF0;">
+
+            <img src="images/{{ $list->images}}" alt="アイコン">
             <div>{{ $list->username}}</div>
             <div>{{ $list->posts }}</div>
             <div>{{ $list->created_at }}</div>

@@ -46,7 +46,11 @@ Route::post('/top/create', 'PostsController@create');
 Route::get('/profile', 'UsersController@profile');
 Route::post('/profile', 'UsersController@update');
 
-Route::get('/search', 'UsersController@index');
+Route::get('/search', 'UsersController@search');
+Route::post('/result', 'UsersController@result');
 
-Route::get('/follow-list', 'PostsController@index');
-Route::get('/follower-list', 'PostsController@index');
+Route::get('/followlist', 'UsersController@followlist');
+Route::get('/followerlist', 'UsersController@followerlist');
+
+Route::post('/follow/create', 'FollowsController@create');
+Route::post('/follow/delete', 'FollowsController@delete');

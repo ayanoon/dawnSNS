@@ -107,8 +107,66 @@ class UsersController extends Controller
         }
     }
 
-    public function search()
+    public function search() //全ユーザーを表示
     {
-        return view('users.search');
+        $users =
+            DB::table('users')
+            ->leftjoin('follows', function ($join) {
+                $join->on('users.id', '=', 'follows.follow')
+                    ->where('follower', Auth::id());
+            })
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower')
+            ->orderby('users.id')
+            ->where('users.id', '<>', Auth::id())
+            ->get();
+
+
+
+
+
+
+
+
+        // \DB::table('users')
+        // ->leftJoin('follows', 'users.id', '=', 'follows.follow')
+        // ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower') //テーブルを結合した後に、その中から使いたい情報だけ持ってくる。これでIDはusersテーブルのidを使うよと指示できる。
+        // ->get();
+
+        //dd($users);
+
+        return view('users.search', compact('users')); //カッコ内$いらない
+    }
+
+    public function result(Request $request)
+    {
+        $keyword = $request->input('keyword'); //inputタグで送っているからinputで受け取る
+        $users = \DB::table('users')
+            ->join('follows', function ($join) {
+                $join->on('users.id', '=', 'follows.follow')
+                    ->where('username', 'like', "%$keyword%"); //ユーザーネームカラムの値が $keywordを含むものを抽出
+            })
+            ->get();
+
+        return view('users.search', compact('users'));
+    }
+
+    //ここから下、自分でフォローリストフォロワーリスト書いてみた。
+    //これもJOINして、usersテーブルの情報と結合して渡す必要があるけど
+    //やり方がわからないので月曜日教えてもらったら完成させよう・・
+
+    public function followlist()
+    {
+        $users = \DB::table('follows')
+            ->where('follow', Auth::id())
+            ->get();
+        return view('users.followlist', compact('users'));
+    }
+
+    public function followerlist()
+    {
+        $users = \DB::table('follows')
+            ->where('follower', Auth::id())
+            ->get();
+        return view('users.followerlist', compact('users'));
     }
 }

@@ -15,14 +15,14 @@ class PostsController extends Controller
     {
         $auth = Auth::user();
         $follow_id = DB::table('follows')
-            ->where('follower', Auth::id()) //ログインしている人のID=自分
-            ->pluck('follow'); //自分がフォローしている人のIDを取得
+            ->where('follower', Auth::id()) //followsテーブルのfollowerカラムが自分=自分がフォローしている人
+            ->pluck('follow'); //情報を取得
         $posts_list = DB::table('posts')
-            ->join('users', 'users.id', '=', 'posts.user_id')
-            ->whereIn('users.id', $follow_id) //自分がフォローしてる人の情報を引っ張る
-            ->orWhere('users.id', Auth::id()) //自分の情報を引っ張る
+            ->join('users', 'users.id', '=', 'posts.user_id') //postsテーブルと、usersテーブルをJOIN。usersテーブルのIDカラムと、postsテーブルのuser_idカラムが同じところをJOINする。
+            ->whereIn('users.id', $follow_id) //usersテーブルのidカラムが自分がフォローしている人か、
+            ->orWhere('users.id', Auth::id()) //usersテーブルのidカラムが自分
             ->select('users.images', 'users.username', 'posts.posts', 'posts.created_at', 'posts.updated_at', 'posts.user_id', 'posts.id')
-            ->orderby('posts.created_at', 'desc')
+            ->orderby('posts.created_at', 'desc') //新しい順に並べる
             ->get();
 
         return view('posts.index', compact('auth', 'posts_list'));
@@ -34,7 +34,9 @@ class PostsController extends Controller
         $post = $request->input('newPost');
         \DB::table('posts')->insert([
             'posts' => $post,
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         return redirect('/top');
     }

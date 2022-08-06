@@ -23,26 +23,31 @@
 
 <body>
     <header>
-        <div id="head">
-            <h1><a href="/top"><img src="images/main_logo.png" alt="DAWNロゴ"></a></h1>
+        <nav class="g-navi">
+            <div class="nav-wrapper">
+                <ul>
+                    <li class="nav-item"><a href="/top">ホーム</a></li>
+                    <li class="nav-item"><a href="/profile">プロフィール</a></li>
+                    <li class="nav-item"><a href="/">ログアウト</a></li>
+                </ul>
+            </div>
+        </nav>
 
-            <nav>
+        <nav class="g-navi-sp">
+            <div id="head">
+                <h1><a href="/top"><img src="images/main_logo.png" alt="DAWNロゴ"></a></h1>
+
+
                 <div id="">
-                    <p>{{ $user = Auth::user()->username }}さん<img src="images/arrow.png"></p>
+                    <p>{{ $user = Auth::user()->username }}さん<img src="images/{{Auth::user()->images}}" alt="アイコン"></p>
                 </div>
                 <div class="menu-trigger">
                     <span></span>
                     <span></span>
                 </div>
-                <div>
-                    <ul>
-                        <li><a href="/top">ホーム</a></li>
-                        <li><a href="/profile">プロフィール</a></li>
-                        <li><a href="/logout">ログアウト</a></li>
-                    </ul>
-                </div>
-            </nav>
+        </nav>
     </header>
+
 
     <div id="row">
         <div id="container">
@@ -62,7 +67,7 @@
                 </div>
                 <p class="btn"><a href="">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
