@@ -15,7 +15,7 @@
 <img src="images/{{$user->images}}" alt="アイコン">
 {{$user->username}}
 
-@if($user->follow == Auth::id())
+@if($user->follower == Auth::id())
 <form action="/follow/delete" method="POST">
   @csrf
   <input type="hidden" value="{{$user->id}}" name="id">
@@ -23,8 +23,7 @@
 </form>
 
 @elseif($user->id == Auth::id())
-<img src="images/{{$user->images}}" alt="アイコン">
-{{$user->username}}
+<h1>自分なのでボタンを表示しない</h1>
 
 @else
 <form action="/follow/create" method="POST">

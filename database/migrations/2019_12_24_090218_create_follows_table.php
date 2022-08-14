@@ -15,8 +15,8 @@ class CreateFollowsTable extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->increments('id')->autoIncrement();
-            $table->integer('follow_id');
-            $table->integer('follower_id');
+            $table->integer('follow');
+            $table->integer('follower');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }

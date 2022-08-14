@@ -111,21 +111,11 @@ class UsersController extends Controller
     {
         $users =
             DB::table('users')
-            ->leftjoin('follows', function ($join) {
-                $join->on('users.id', '=', 'follows.follow')
-                    ->where('follower', Auth::id());
-            })
+            ->leftJoin('follows', 'users.id', '=', 'follows.follow')
             ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower')
             ->orderby('users.id')
-            ->where('users.id', '<>', Auth::id())
+            // ->where('users.id', '<>', Auth::id())
             ->get();
-
-
-
-
-
-
-
 
         // \DB::table('users')
         // ->leftJoin('follows', 'users.id', '=', 'follows.follow')
@@ -141,10 +131,10 @@ class UsersController extends Controller
     {
         $keyword = $request->input('keyword'); //inputタグで送っているからinputで受け取る
         $users = \DB::table('users')
-            ->join('follows', function ($join) {
-                $join->on('users.id', '=', 'follows.follow')
-                    ->where('username', 'like', "%$keyword%"); //ユーザーネームカラムの値が $keywordを含むものを抽出
-            })
+            ->leftJoin('follows', 'users.id', '=', 'follows.follow') //joinでやると、自分がフォローしていない人などが出てこない。
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower')
+            ->where('username', 'like', "%$keyword%") //ユーザーネームカラムの値が $keywordを含むものを抽出
+            ->orderby('users.id')
             ->get();
 
         return view('users.search', compact('users'));
