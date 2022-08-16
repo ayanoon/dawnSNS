@@ -114,7 +114,7 @@ class UsersController extends Controller
             ->leftJoin('follows', 'users.id', '=', 'follows.follow')
             ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower')
             ->orderby('users.id')
-            // ->where('users.id', '<>', Auth::id())
+            ->where('users.id', '<>', Auth::id())
             ->get();
 
         // \DB::table('users')
@@ -137,7 +137,7 @@ class UsersController extends Controller
             ->orderby('users.id')
             ->get();
 
-        return view('users.search', compact('users'));
+        return view('users.search', compact('users', 'keyword'));
     }
 
     //ここから下、自分でフォローリストフォロワーリスト書いてみた。
@@ -146,17 +146,58 @@ class UsersController extends Controller
 
     public function followlist()
     {
-        $users = \DB::table('follows')
-            ->where('follow', Auth::id())
+        $users = \DB::table('users')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follow')
+            ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower', 'posts.posts', 'posts.created_at')
+            ->orderBy('posts.created_at', 'desc')
+            ->where('follower', Auth::id())
             ->get();
-        return view('users.followlist', compact('users'));
+
+        //dd($users);
+
+        $follows = \DB::table('users')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follow')
+            ->select('users.id', 'users.images', 'follows.follow', 'follows.follower')
+            ->where('follower', Auth::id())
+            ->get();
+
+        return view('users.followList', compact('users', 'follows'));
     }
 
     public function followerlist()
     {
-        $users = \DB::table('follows')
-            ->where('follower', Auth::id())
+        $users = \DB::table('users')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follower')
+            ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'follows.follow', 'follows.follower', 'posts.posts', 'posts.created_at')
+            ->orderBy('posts.created_at', 'desc')
+            ->where('follow', Auth::id())
             ->get();
-        return view('users.followerlist', compact('users'));
+
+        //dd($users);
+
+        $follows = \DB::table('users')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follower')
+            ->select('users.id', 'users.username', 'users.images', 'follows.follow', 'follows.follower')
+            ->where('follow', Auth::id())
+            ->get();
+
+        //dd($follows);
+
+        return view('users.followerList', compact('users', 'follows'));
+    }
+
+    public function followerDetail($id)
+    {
+        $detail = \DB::table('users')
+            ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'posts.posts', 'posts.updated_at')
+            ->where('users.id', $id)
+            ->get();
+
+        //dd($detail);
+
+        return view('users.followerDetail', compact('detail'));
     }
 }

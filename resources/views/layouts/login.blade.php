@@ -28,7 +28,7 @@
                 <ul>
                     <li class="nav-item"><a href="/top">ホーム</a></li>
                     <li class="nav-item"><a href="/profile">プロフィール</a></li>
-                    <li class="nav-item"><a href="/">ログアウト</a></li>
+                    <li class="nav-item"><a href="/login">ログアウト</a></li>
                 </ul>
             </div>
         </nav>
@@ -60,12 +60,12 @@
                     <p>フォロー数</p>
                     <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <p class="btn"><a href="/followlist">フォローリスト</a></p>
                 <div>
                     <p>フォロワー数</p>
                     <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <p class="btn"><a href="/followerlist">フォロワーリスト</a></p>
             </div>
             <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>

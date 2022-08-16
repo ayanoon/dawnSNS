@@ -2,25 +2,22 @@
 
 @section('content')
 
-<h1>Follow list</h1>
+<h1>Name</h1>
+{{ $detail[0]->username }}
 
-@foreach($follows as $follow)
-<a href=""><img src="images/{{$follow->images}}" alt="アイコン"></a>
-@endforeach
+<h1>Bio</h1>
+{{ $detail[0]->bio }}
 
-<br>
-
-@foreach($users as $user)
+@foreach($detail as $user)
 @if(isset($user->posts))
 
 <img src="images/{{ $user->images}}" alt="アイコン">
 <div>{{ $user->username}}</div>
 <div>{{ $user->posts }}</div>
-<div>{{ $user->created_at }}</div>
+<div>{{ $user->updated_at }}</div>
 
 @endif
 @endforeach
-
 
 
 @endsection

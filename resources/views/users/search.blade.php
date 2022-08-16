@@ -11,7 +11,12 @@
   <button type="submit"><img src="images/search.png" alt="検索"></button>
 </form>
 
+@if(isset($keyword))
+<h1 class="search">検索ワード:{{$keyword}}</h1>
+@endif
+
 @foreach($users as $user)
+
 <img src="images/{{$user->images}}" alt="アイコン">
 {{$user->username}}
 
