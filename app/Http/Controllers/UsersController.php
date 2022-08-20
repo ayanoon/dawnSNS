@@ -188,11 +188,26 @@ class UsersController extends Controller
         return view('users.followerList', compact('users', 'follows'));
     }
 
+    public function followDetail($id)
+    {
+        $detail = \DB::table('users')
+            ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follow')
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'posts.posts', 'posts.updated_at', 'follows.follower')
+            ->where('users.id', $id)
+            ->get();
+
+        //dd($detail);
+
+        return view('users.followDetail', compact('detail'));
+    }
+
     public function followerDetail($id)
     {
         $detail = \DB::table('users')
             ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
-            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'posts.posts', 'posts.updated_at')
+            ->leftJoin('follows', 'users.id', '=', 'follows.follower')
+            ->select('users.id', 'users.username', 'users.bio', 'users.images', 'posts.posts', 'posts.updated_at', 'follows.follow')
             ->where('users.id', $id)
             ->get();
 

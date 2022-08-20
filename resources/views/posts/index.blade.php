@@ -25,10 +25,10 @@
 
             @if ($list->user_id == Auth::id())
             <div>
-                <a class="btn" href="/top/{{$list->id}}/update-form"><img src="images/edit.png" alt="編集"></a>
+                <a class="btn" href="/top/{{$list->id}}/update-form"><img src="{{asset('images/edit.png')}}" alt="編集"></a>
             </div>
             <div>
-                <a class="btn" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')" href="/top/{{$list->id}}/delete"><img src="images/trash.png" alt="削除"></a>
+                <a class="btn" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')" href="/top/{{$list->id}}/delete"><img src="{{asset('images/trash.png')}}" alt="削除"></a>
             </div>
             @endif
 

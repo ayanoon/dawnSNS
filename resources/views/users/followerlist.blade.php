@@ -5,7 +5,7 @@
 <h1>Follower list</h1>
 
 @foreach($follows as $follow)
-<a href="/followerlist/{{$follow->id}}/followerDetail"><img src="images/{{$follow->images}}" alt="アイコン"></a>
+<a href="/followerlist/{{$follow->id}}/followerDetail"><img src="{{ asset('images/' . $follow->images) }}" alt="アイコン"></a>
 @endforeach
 
 <br>

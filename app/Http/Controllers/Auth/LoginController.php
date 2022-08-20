@@ -40,22 +40,30 @@ class LoginController extends Controller
         //HTTPリクエストが送られたタイミングで実行される処理を定義する機能
     }
 
-    public function login(Request $request){
-        if($request->isMethod('post')){
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) {
             //もしリクエストが「post」だったら
-            $data=$request->only('mail','password');
+            $data = $request->only('mail', 'password');
             // $dataは送信したデータのうち、mailとpwのみを取得
 
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
-            if(Auth::attempt($data)){
+            if (Auth::attempt($data)) {
                 return redirect('/top');
             }
         }
         return view("auth.login");
     }
 
-    public function added(){
+    public function added()
+    {
         return view('auth.added');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

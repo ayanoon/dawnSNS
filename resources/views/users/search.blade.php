@@ -27,8 +27,8 @@
   <button type="submit">フォローを外す</button>
 </form>
 
-@elseif($user->id == Auth::id())
-<h1>自分なのでボタンを表示しない</h1>
+<!-- @elseif($user->id == Auth::id())
+<h1>自分なのでボタンを表示しない</h1> -->
 
 @else
 <form action="/follow/create" method="POST">
