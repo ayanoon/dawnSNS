@@ -56,18 +56,25 @@
         <div id="side-bar">
             <div id="confirm">
                 <p>{{ $user = Auth::user()->username }}さんの</p>
-                <div>
-                    <p>フォロー数</p>
-                    <p>{{ $follow = DB::table('follows')->whereIn('follow', Auth::user('id'))->count() }}名</p>
+                <div class="side-follow">
+                    <div class="user-count">
+                        <p>フォロー数</p>
+                        <p>{{ $follow = DB::table('follows')->whereIn('follow', Auth::user('id'))->count() }}名</p>
+                    </div>
+                    <p class="side-btn"><a href="/followlist">フォローリスト</a></p>
                 </div>
-                <p class="btn"><a href="/followlist">フォローリスト</a></p>
-                <div>
-                    <p>フォロワー数</p>
-                    <p>{{ $follower = DB::table('follows')->whereIn('follower', Auth::user('id'))->count() }}名</p>
+
+                <div class="side-follow">
+                    <div class="user-count">
+                        <p>フォロワー数</p>
+                        <p>{{ $follower = DB::table('follows')->whereIn('follower', Auth::user('id'))->count() }}名</p>
+                    </div>
+                    <p class="side-btn"><a href="/followerlist">フォロワーリスト</a></p>
                 </div>
-                <p class="btn"><a href="/followerlist">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <div class="delimit">
+                <p class="side-btn search-btn"><a href="/search">ユーザー検索</a></p>
+            </div>
         </div>
     </div>
     <footer>

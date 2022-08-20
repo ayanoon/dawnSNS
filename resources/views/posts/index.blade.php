@@ -1,9 +1,10 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>機能を実装していきましょう。</h2>
+
 <div class="wrapper">
 
+    <img class="user-image" src="/images/{{ Auth::user()->images }}" alt="アイコン">
     {!! Form::open(['url' => 'top/create']) !!}
     <div class="form-group">
         {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '何をつぶやこうか…?']) !!}
@@ -17,7 +18,7 @@
         @foreach($posts_list as $list)
         <div style="padding:2rem; border-top: solid 1px #E6ECF0; border-bottom: solid 1px #E6ECF0;">
 
-            <img src="images/{{ $list->images}}" alt="アイコン">
+            <img class="user-image" src="images/{{ $list->images}}" alt="アイコン">
             <div>{{ $list->username}}</div>
             <div>{{ $list->posts }}</div>
             <div>{{ $list->created_at }}</div>
