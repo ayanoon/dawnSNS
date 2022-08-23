@@ -23,28 +23,29 @@
 
 <body>
     <header>
-        <nav class="g-navi">
-            <div class="nav-wrapper">
+        <div class="header">
+            <nav class="g-navi">
                 <ul>
                     <li class="nav-item"><a href="/top">ホーム</a></li>
                     <li class="nav-item"><a href="/profile">プロフィール</a></li>
                     <li class="nav-item"><a href="/logout">ログアウト</a></li>
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </div>
 
         <nav class="g-navi-sp">
             <div id="head">
-                <h1><a href="/top"><img src="{{asset('images/main_logo.png')}}" alt="DAWNロゴ"></a></h1>
+                <a href="/top"><img src="{{ asset('images/main_logo.png') }}" alt="DAWNロゴ"></a>
 
-
-                <div id="">
-                    <p>{{ $user = Auth::user()->username }}さん<img src="{{ asset('images/' . Auth::user()->images) }}" alt="アイコン"></p>
+                <div class="login-user">
+                    <p class="login-name">{{ $user = Auth::user()->username }}さん</p>
+                    <div class="menu-trigger">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <img src="{{ asset('images/' . Auth::user()->images) }}" alt="アイコン" class="login-image">
                 </div>
-                <div class="menu-trigger">
-                    <span></span>
-                    <span></span>
-                </div>
+            </div>
         </nav>
     </header>
 
